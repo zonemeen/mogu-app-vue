@@ -6,11 +6,11 @@
     <ul class="current">
       <li
         v-for="tag in dataSource"
-        :key="tag"
+        :key="tag.id"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
         @click="toggle(tag)"
       >
-        {{ tag }}
+        {{ tag.name }}
       </li>
     </ul>
   </div>
@@ -46,6 +46,7 @@ export default class Tags extends Vue {
 
 <style lang="scss" scoped>
 .tags {
+  background: white;
   font-size: 14px;
   padding: 16px;
   flex-grow: 1;
@@ -56,7 +57,7 @@ export default class Tags extends Vue {
     flex-wrap: wrap;
     > li {
       $bg: #d9d9d9;
-      background: #d9d9d9;
+      background: $bg;
       $h: 24px;
       height: $h;
       line-height: $h;
