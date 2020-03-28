@@ -1,4 +1,4 @@
-import createId from "../../lib/creteId";
+import createId from "../lib/creteId";
 
 const localStorageKeyName = "tagList";
 type Tag = {
