@@ -22,10 +22,8 @@ export default class FormItem extends Vue {
 
   @Prop({ required: true }) fieldName!: string;
   @Prop() placeholder?: string;
-  // Watch只会在变化的时候触发
-  // @Watch("value")
+
   onValueChanged(value: string) {
-    //value为新的值
     this.$emit("update:value", value);
   }
 }
