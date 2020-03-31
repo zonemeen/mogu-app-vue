@@ -1,9 +1,16 @@
+type RootState = {
+  recordList: RecordItem[];
+  createRecordError: Error | null;
+  createTagError: Error | null;
+  tagList: Tag[];
+  currentTag?: Tag;
+};
 type RecordItem = {
-  tags: string[];
+  tags: Tag[];
   notes: string;
   type: string;
-  amount: number; // 数据类型
-  createdAt?: Date; // 类
+  amount: number; // 数据类型 object | string
+  createdAt?: string; // 类 / 构造函数
 };
 type Tag = {
   id: string;

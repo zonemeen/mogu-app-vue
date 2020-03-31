@@ -13,9 +13,14 @@ Vue.component("Nav", Nav);
 Vue.component("Layout", Layout);
 Vue.component("Icon", Icon);
 
-
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+
+window.onload = function() {
+  setTimeout(function() {
+    window.scrollTo(0, 200);
+  }, 0);
+};
