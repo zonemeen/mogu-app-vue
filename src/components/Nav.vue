@@ -3,20 +3,20 @@
     <div>
       <router-link to="/bill" class="nav-item" active-class="selected">
         <Icon name="bill" class="icon" />
+        <span>明细</span>
       </router-link>
-      <span>明细</span>
     </div>
     <div>
       <router-link to="/money" class="nav-item" active-class="selected">
         <Icon name="money" class="icon icon-money" />
+        <span>记账</span>
       </router-link>
-      <span>记账</span>
     </div>
     <div>
-      <router-link to="/charts" class="nav-item" active-class="selected">
-        <Icon name="chart" class="icon" />
+      <router-link to="/statistics" class="nav-item" active-class="selected">
+        <Icon name="statistics" class="icon" />
+        <span>统计</span>
       </router-link>
-      <span>图表</span>
     </div>
   </nav>
 </template>
@@ -38,7 +38,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 40px;
+  padding: 8px 40px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   position: fixed;
   left: 0;
@@ -56,7 +56,7 @@ nav {
       height: 24px;
     }
     &.selected {
-      color: #ffda47;
+      color: #3eb575;
     }
   }
 }

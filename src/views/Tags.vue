@@ -145,7 +145,7 @@ export default class Label extends Vue {
 }
 
 .header {
-  background: #ffda47;
+  background: #3eb575;
   font-size: 20px;
   line-height: 24px;
   padding: 12px 16px;
@@ -198,8 +198,8 @@ export default class Label extends Vue {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      color: #f7d680;
-      border: 1px solid #f7d680;
+      color: #77dba6;
+      border: 1px solid #77dba6;
       display: flex;
       justify-content: center;
       align-items: center;

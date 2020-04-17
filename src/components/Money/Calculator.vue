@@ -289,11 +289,11 @@ export default class Calculator extends Vue {
     @extend %clear-fix;
 
     button {
-      $h: 56px;
+      $h: 50px;
       float: left;
       width: 25%;
       height: $h;
-      font-size: 16px;
+      font-size: 15px;
       border: none;
 
       &.ok {

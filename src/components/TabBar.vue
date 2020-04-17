@@ -9,9 +9,7 @@
       v-for="(bar, index) in bars"
       :key="index"
       @click="select(bar.value)"
-    >
-      {{ bar.name }}
-    </li>
+    >{{ bar.name }}</li>
   </ul>
 </template>
 
@@ -34,16 +32,15 @@ export default class TabBar extends Vue {
 <style lang="scss" scoped>
 .tab-bar {
   display: flex;
-  justify-content: center;
-  align-items: center;
-
   &-item {
-    font-size: 20px;
+    font-size: 14px;
     padding: 4px;
-    border-bottom: 1px solid transparent;
+    border: 1px solid #343233;
 
     &.selected {
-      border-bottom: 1px solid #333333;
+      border: 1px solid #343233;
+      background-color: #343233;
+      color: #3eb575;
     }
   }
 }

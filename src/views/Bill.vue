@@ -257,7 +257,7 @@ export default class Bill extends Vue {
 
 <style lang="scss" scoped>
 .header {
-  background: #ffda47;
+  background: #3eb575;
 
   .logo {
     img {
@@ -276,7 +276,6 @@ export default class Bill extends Vue {
 
     .label {
       font-size: 12px;
-      color: #a38932;
       margin-bottom: 4px;
     }
 
@@ -297,7 +296,6 @@ export default class Bill extends Vue {
 
       .year {
         font-size: 12px;
-        color: #a38932;
         padding: 0 3px;
         margin-bottom: 5px;
       }
@@ -346,7 +344,7 @@ export default class Bill extends Vue {
       color: #999999;
       display: flex;
       justify-content: space-between;
-      padding: 4px 16px;
+      padding: 8px 16px;
       border-bottom: 1px solid #dddddd;
     }
 

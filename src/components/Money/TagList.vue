@@ -58,14 +58,14 @@ export default class TagList extends Vue {
   overflow: auto;
   &-item {
     width: 25%;
-    padding: 12px 0;
+    padding: 8px 0;
     font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     &-icon {
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       padding: 4px;
       border-radius: 50%;
       background: #f5f5f5;
@@ -74,7 +74,7 @@ export default class TagList extends Vue {
       justify-content: center;
       align-items: center;
       &.selected {
-        background: #ffda47;
+        background: #77dba6;
       }
       svg {
         width: 40px;

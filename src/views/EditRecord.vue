@@ -142,7 +142,7 @@ export default class EditRecord extends Vue {
 }
 
 .header {
-  background: #ffda47;
+  background: #3eb575;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -230,7 +230,7 @@ export default class EditRecord extends Vue {
     }
 
     &:last-child {
-      color: #b84e52;
+      color: #ce3035;
     }
   }
 }

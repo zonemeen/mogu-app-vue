@@ -3,6 +3,7 @@
     <div class="money">
       <div class="types">
         <TabBar
+          class="radius"
           class-prefix="types"
           :bars="[
           { name: '支出', value: '-' },
@@ -90,7 +91,7 @@ export default class Money extends Vue {
 ::v-deep {
   .money-calculator {
     position: fixed;
-    bottom: 48px;
+    bottom: 54px;
     left: 0;
     width: 100vw;
   }
@@ -103,22 +104,22 @@ export default class Money extends Vue {
 }
 
 .types {
-  background: #ffda47;
+  background: #3eb575;
   display: flex;
   justify-content: center;
   position: relative;
-
-  ::v-deep .types-tab-bar-item {
-    padding: 24px 16px 8px 16px;
+  :nth-child(1) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  :nth-child(2) {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 
-  .cancel {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    font-size: 14px;
-    padding: 24px 16px 8px 16px;
+  ::v-deep .types-tab-bar-item {
+    padding: 5px 50px;
+    margin: 15px 0;
   }
 }
 </style>

@@ -332,7 +332,7 @@ export default class Charts extends Vue {
 
 <style lang="scss" scoped>
 .header {
-  background: #ffda47;
+  background: #3eb575;
   padding: 4px 0;
 
   .type {
@@ -361,7 +361,7 @@ export default class Charts extends Vue {
 
         &.selected {
           background: #333333;
-          color: #ffda47;
+          color: #3eb575;
         }
       }
     }
