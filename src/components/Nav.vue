@@ -1,47 +1,63 @@
 <template>
   <nav>
-    <router-link class="item" to="/money" active-class="selected">
-      <Icon name="money" />
-      记账
-    </router-link>
-    <router-link class="item" to="/labels" active-class="selected">
-      <Icon name="label" />
-      标签
-    </router-link>
-    <router-link class="item" to="/statistics" active-class="selected">
-      <Icon name="statistics" />
-      统计
-    </router-link>
+    <div>
+      <router-link to="/bill" class="nav-item" active-class="selected">
+        <Icon name="bill" class="icon" />
+      </router-link>
+      <span>明细</span>
+    </div>
+    <div>
+      <router-link to="/money" class="nav-item" active-class="selected">
+        <Icon name="money" class="icon icon-money" />
+      </router-link>
+      <span>记账</span>
+    </div>
+    <div>
+      <router-link to="/charts" class="nav-item" active-class="selected">
+        <Icon name="chart" class="icon" />
+      </router-link>
+      <span>图表</span>
+    </div>
   </nav>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Nav"
-};
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import Icon from "@/components/Icon.vue";
+
+@Component({
+  components: { Icon }
+})
+export default class Nav extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/style/helper.scss";
 nav {
-  @extend %outerShadow;
-  display: flex;
-  flex-direction: row;
   font-size: 12px;
-  > .item {
-    padding: 2px 0;
-    width: 33.33333%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 40px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: white;
+
+  .nav-item {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
     }
-  }
-  > .item.selected {
-    color: $color-highlight;
+    &.selected {
+      color: #ffda47;
+    }
   }
 }
 </style>

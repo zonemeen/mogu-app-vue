@@ -1,65 +1,124 @@
 <template>
-  <Layout class-prefix="layout">
-    <NumberPad :value.sync="record.amount" @submit="saveRecord" />
-    <Tabs :data-source="recordTypeList" :value.sync="record.type" />
-    <div class="notes">
-      <FormItem
-        field-name="备注"
-        placeholder="在这里输入备注"
-        :value.sync="record.notes"
+  <Layout>
+    <div class="money">
+      <div class="types">
+        <TabBar
+          class-prefix="types"
+          :bars="[
+          { name: '支出', value: '-' },
+          { name: '收入', value: '+' }
+        ]"
+          :c-bar.sync="record.type"
+        />
+      </div>
+      <TagList
+        v-if="record.type === '-'"
+        class-prefix="money"
+        :dynamic="true"
+        :selected-tag.sync="record.tag"
+        :tag-list="tagList"
+        class="tag-list"
+      />
+      <TagList
+        v-else-if="record.type === '+'"
+        class-prefix="money"
+        :selected-tag.sync="record.tag"
+        :tag-list="incomeTags"
+        class="tag-list"
+      />
+      <Calculator
+        class-prefix="money"
+        :note.sync="record.note"
+        :amount.sync="record.amount"
+        @complete="complete"
       />
     </div>
-    <Tags @update:value="record.tags = $event" />
   </Layout>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import NumberPad from "@/components/Money/NumberPad.vue";
-import FormItem from "@/components/Money/FormItem.vue";
-import Tags from "@/components/Money/Tags.vue";
-import { Component } from "vue-property-decorator";
-import Tabs from "@/components/Tabs.vue";
-import recordTypeList from "@/constants/recordTypeList";
+import { Component, Watch } from "vue-property-decorator";
+import Layout from "@/components/Layout.vue";
+import Icon from "@/components/Icon.vue";
+import Calculator from "@/components/Money/Calculator.vue";
+import TagList from "@/components/Money/TagList.vue";
+import clone from "@/lib/clone";
+import { defaultIncomeTags } from "@/constants/defaultTags";
+import TabBar from "@/components/TabBar.vue";
+
 @Component({
-  components: { Tabs, Tags, FormItem, NumberPad }
+  components: { TabBar, TagList, Calculator, Icon, Layout }
 })
 export default class Money extends Vue {
-  get recordList() {
-    return this.$store.state.recordList;
+  record: RecordItem = this.initRecord();
+  incomeTags = defaultIncomeTags;
+
+  get tagList(): TagItem[] {
+    return this.$store.state.tagList;
   }
-  recordTypeList = recordTypeList;
-  record: RecordItem = {
-    tags: [],
-    notes: "",
-    type: "-",
-    amount: 0
-  };
-  created() {
-    this.$store.commit("fetchRecords");
+
+  initRecord(): RecordItem {
+    return {
+      tag: { name: "food", value: "餐饮" },
+      type: "-",
+      note: "",
+      amount: 0
+    };
   }
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
+
+  complete() {
+    this.$store.commit("insertRecord", clone<RecordItem>(this.record));
+    this.record = this.initRecord();
+    this.$router.replace("/bill");
   }
-  saveRecord() {
-    if (!this.record.tags || this.record.tags.length === 0) {
-      return window.alert("请至少选择一个标签");
-    }
-    this.$store.commit("createRecord", this.record);
-    if (this.$store.state.createRecordError === null) {
-      window.alert("已保存");
-      this.record.notes = "";
+
+  @Watch("record.type")
+  onTypeChange(type: string) {
+    if (type === "+") {
+      this.record.tag = { name: "salary", value: "工资" };
+    } else if (type === "-") {
+      this.record.tag = { name: "food", value: "餐饮" };
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-::v-deep .layout-content {
-  display: flex;
-  flex-direction: column-reverse;
+@import "~@/assets/styles/style.scss";
+
+::v-deep {
+  .money-calculator {
+    position: fixed;
+    bottom: 48px;
+    left: 0;
+    width: 100vw;
+  }
 }
-.notes {
-  padding: 12px 0;
+
+.money {
+  .tag-list {
+    padding-bottom: 76+56 * 4+12px;
+  }
+}
+
+.types {
+  background: #ffda47;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  ::v-deep .types-tab-bar-item {
+    padding: 24px 16px 8px 16px;
+  }
+
+  .cancel {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 14px;
+    padding: 24px 16px 8px 16px;
+  }
 }
 </style>

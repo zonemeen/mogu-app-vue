@@ -1,94 +1,88 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import clone from "@/lib/clone";
-import router from "@/router";
-import createId from '@/lib/creteId';
+import { defaultExpenseTags } from "@/constants/defaultTags";
+import idCreator from "@/lib/idCreator";
 
 Vue.use(Vuex);
 
+type storeState = {
+  tagList: TagItem[];
+  recordList: RecordItem[];
+  tagListError: "" | "duplicate";
+  currentRecord: RecordItem | undefined;
+  recordListError: "" | "notfound";
+};
+
 const store = new Vuex.Store({
   state: {
-    recordList: [],
-    createRecordError: null,
-    createTagError: null,
-    tagList: [],
-    currentTag: undefined
-  } as RootState,
+    tagList:
+      JSON.parse(window.localStorage.getItem("tag-list") || "0") ||
+      defaultExpenseTags,
+    recordList: JSON.parse(window.localStorage.getItem("record-list") || "[]"),
+    tagListError: "",
+    currentRecord: undefined,
+    recordListError: ""
+  } as storeState,
   mutations: {
-    setCurrentTag(state, id: string) {
-      state.currentTag = state.tagList.filter(t => t.id === id)[0];
+    insertRecord(state, record: RecordItem) {
+      record.id = idCreator();
+      record.createAt = new Date();
+      record.amount = Math.abs(record.amount); // 保证金额为正
+      state.recordList.push(record);
+      store.commit("saveRecord");
     },
-    updateTag(state, payload: { id: string; name: string }) {
-      const { id, name } = payload;
-      const idList = state.tagList.map(item => item.id);
-      if (idList.indexOf(id) >= 0) {
-        const names = state.tagList.map(item => item.name);
-        if (names.indexOf(name) >= 0) {
-          window.alert("标签名重复了");
-        } else {
-          const tag = state.tagList.filter(item => item.id === id)[0];
-          tag.name = name;
-          store.commit("saveTags");
-        }
+    findRecord(state, id: number) {
+      state.currentRecord = undefined;
+      const record = state.recordList.filter(item => item.id === id)[0];
+      if (record) {
+        state.currentRecord = record;
       }
     },
-    removeTag(state, id: string) {
-      let index = -1;
-      for (let i = 0; i < state.tagList.length; i++) {
-        if (state.tagList[i].id === id) {
-          index = i;
+    updateRecord(state, payload: { id: number; record: RecordItem }) {
+      const { id, record } = payload;
+      let index = 0;
+      for (index = 0; index < state.recordList.length; index++) {
+        if (state.recordList[index].id === id) {
+          state.recordList[index] = record;
           break;
         }
       }
-      if (index >= 0) {
-        state.tagList.splice(index, 1);
-        store.commit("saveTags");
-        router.back();
+      store.commit("saveRecord");
+    },
+    removeRecord(state, id: number) {
+      state.recordListError = "";
+      let index = 0;
+      for (index = 0; index < state.recordList.length; index++) {
+        if (state.recordList[index].id === id) {
+          break;
+        }
+      }
+      if (index === state.recordList.length) {
+        state.recordListError = "notfound";
       } else {
-        window.alert("删除失败");
+        state.recordList.splice(index, 1);
+        store.commit("saveRecord");
       }
     },
-    fetchRecords(state) {
-      state.recordList = JSON.parse(
-        window.localStorage.getItem("recordList") || "[]"
-      ) as RecordItem[];
-    },
-    createRecord(state, record: RecordItem) {
-      const record2 = clone(record);
-      record2.createdAt = new Date().toISOString();
-      state.recordList.push(record2);
-      store.commit("saveRecords");
-    },
-    saveRecords(state) {
+    saveRecord(state) {
       window.localStorage.setItem(
-        "recordList",
+        "record-list",
         JSON.stringify(state.recordList)
       );
     },
-    fetchTags(state) {
-      state.tagList = JSON.parse(
-        window.localStorage.getItem("tagList") || "[]"
-      );
-      if (!state.tagList || state.tagList.length === 0) {
-        store.commit("createTag", "衣");
-        store.commit("createTag", "食");
-        store.commit("createTag", "住");
-        store.commit("createTag", "行");
-      }
-    },
-    createTag(state, name: string) {
-      state.createTagError = null;
+    insertTag(state, tag: TagItem) {
+      state.tagListError = "";
       const names = state.tagList.map(item => item.name);
-      if (names.indexOf(name) >= 0) {
-        state.createTagError = new Error("tag name duplicated");
+      if (names.indexOf(tag.name) >= 0) {
+        state.tagListError = "duplicate";
         return;
+      } else {
+        state.tagList.push(tag);
+        store.commit("saveTag");
       }
-      const id = createId().toString();
-      state.tagList.push({ id, name: name });
-      store.commit("saveTags");
     },
-    saveTags(state) {
-      window.localStorage.setItem("tagList", JSON.stringify(state.tagList));
+    saveTag(state) {
+      window.localStorage.setItem("tag-list", JSON.stringify(state.tagList));
     }
   }
 });

@@ -1,33 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Money from "@/views/Money.vue";
-import Labels from "@/views/Labels.vue";
-import Statistics from "@/views/Statistics.vue";
+import Bill from "@/views/Bill.vue";
+import Charts from "@/views/Charts.vue";
 import NotFound from "@/views/NotFound.vue";
-import EditLabel from "@/views/EditLabel.vue";
+import Tags from "@/views/Tags.vue";
+import EditRecord from '@/views/EditRecord.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/money"
+    redirect: "/bill"
+  },
+  {
+    path: "/bill",
+    component: Bill
   },
   {
     path: "/money",
     component: Money
   },
   {
-    path: "/labels",
-    component: Labels
+    path: "/tags",
+    component: Tags
   },
   {
-    path: "/statistics",
-    component: Statistics
+    path: "/charts",
+    component: Charts
   },
   {
-    path: "/labels/edit/:id",
-    component: EditLabel
+    path: '/record/edit/:id',
+    component: EditRecord
   },
   {
     path: "/*",
