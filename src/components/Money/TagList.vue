@@ -50,7 +50,7 @@ export default class TagList extends Vue {
 
 <style lang="scss" scoped>
 .tags {
-  padding: 16px;
+  padding: 14px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -58,14 +58,14 @@ export default class TagList extends Vue {
   overflow: auto;
   &-item {
     width: 25%;
-    padding: 8px 0;
-    font-size: 12px;
+    padding: 6px 0;
+    font-size: 11px;
     display: flex;
     flex-direction: column;
     align-items: center;
     &-icon {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       padding: 4px;
       border-radius: 50%;
       background: #f5f5f5;

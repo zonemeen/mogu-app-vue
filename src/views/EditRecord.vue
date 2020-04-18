@@ -137,7 +137,6 @@ export default class EditRecord extends Vue {
 
 <style lang="scss" scoped>
 .edit {
-  position: relative;
   height: 100vh;
 }
 
@@ -147,6 +146,8 @@ export default class EditRecord extends Vue {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
+  position: fixed;
+  width: 100%;
 
   .back {
     width: 32px;
@@ -177,8 +178,8 @@ export default class EditRecord extends Vue {
 }
 
 .main {
+  padding-top: 80px;
   font-size: 16px;
-
   > li {
     margin-left: 16px;
     padding: 12px 0px 12px 16px;

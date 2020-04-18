@@ -331,6 +331,8 @@ export default class Charts extends Vue {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: fixed;
+  width: 100%;
 
   .type {
     font-size: 20px;
@@ -386,7 +388,7 @@ export default class Charts extends Vue {
 }
 
 .chart {
-  padding: 6px 0;
+  padding: 70px 0 6px;
   border-bottom: 1px solid #dddddd;
 
   .caption {

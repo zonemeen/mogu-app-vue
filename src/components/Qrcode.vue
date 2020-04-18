@@ -6,6 +6,11 @@
 </template>
 
 <script lang="ts">
+  import Vue from "vue";
+  import { Component } from "vue-property-decorator";
+  @Component({
+  })
+  export default class Qrcode extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -14,6 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 100px;
 
   span {
     color: #999999;

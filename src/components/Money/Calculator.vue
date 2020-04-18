@@ -1,11 +1,17 @@
 <template>
   <div class="calculator" :class="classPrefix && `${classPrefix}-calculator`">
     <label class="note">
-      <div class="icon">
+      <span class="icon">
         <Icon name="note" />
-      </div>
+      </span>
       <span>备注:</span>
-      <input type="text" placeholder="写点备注吧~" :value="note" @input="writeNote($event.target.value)" />
+      <input
+        type="text"
+        style="font-size: 11px"
+        placeholder="写点备注吧~"
+        :value="note"
+        @input="writeNote($event.target.value)"
+      />
     </label>
     <div class="panel">{{ output }}</div>
     <div class="number-pad">
@@ -14,7 +20,9 @@
         :key="index"
         :class="name === '完成' && 'ok'"
         @click="handle(name)"
-      >{{ name }}</button>
+      >
+        {{ name }}
+      </button>
       <button @click="remove">
         <Icon name="delete" />
       </button>
@@ -254,8 +262,8 @@ export default class Calculator extends Vue {
   .note {
     display: flex;
     align-items: center;
-    padding: 6px 8px;
-    font-size: 14px;
+    padding: 5px 8px;
+    font-size: 11px;
     border-top: 1px solid #f5f5f5;
     background: lighten(#f5f5f5, 4%);
 
@@ -270,7 +278,7 @@ export default class Calculator extends Vue {
     input {
       flex-grow: 1;
       margin-left: 8px;
-      height: 28px;
+      height: 24px;
       border: none;
       background: inherit;
     }
@@ -278,9 +286,9 @@ export default class Calculator extends Vue {
 
   .panel {
     background: #f5f5f5;
-    padding: 12px 12px;
-    font-size: 20px;
-    line-height: 24px;
+    padding: 11px 11px;
+    font-size: 18px;
+    line-height: 18px;
     font-family: Consolas, monospace;
     text-align: right;
   }
@@ -289,11 +297,11 @@ export default class Calculator extends Vue {
     @extend %clear-fix;
 
     button {
-      $h: 46px;
+      $h: 44px;
       float: left;
       width: 25%;
       height: $h;
-      font-size: 14px;
+      font-size: 12px;
       border: none;
 
       &.ok {

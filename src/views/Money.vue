@@ -100,6 +100,7 @@ export default class Money extends Vue {
 .money {
   .tag-list {
     padding-bottom: 76+56 * 4+12px;
+    padding-top: 80px
   }
 }
 
@@ -107,7 +108,8 @@ export default class Money extends Vue {
   background: #3eb575;
   display: flex;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  width: 100%;
   :first-child {
     border-radius: 10px 0 0 10px;
   }

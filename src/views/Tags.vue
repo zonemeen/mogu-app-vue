@@ -23,27 +23,51 @@
     <div class="content">
       <div class="food">
         <div class="kind-name">餐饮</div>
-        <TagList class-prefix="main" :tag-list="foodTags" :selected-tag.sync="tag" />
+        <TagList
+          class-prefix="main"
+          :tag-list="foodTags"
+          :selected-tag.sync="tag"
+        />
       </div>
       <div class="shopping">
         <div class="kind-name">购物</div>
-        <TagList class-prefix="main" :tag-list="shoppingTags" :selected-tag.sync="tag" />
+        <TagList
+          class-prefix="main"
+          :tag-list="shoppingTags"
+          :selected-tag.sync="tag"
+        />
       </div>
       <div class="transport">
         <div class="kind-name">交通</div>
-        <TagList class-prefix="main" :tag-list="transportTags" :selected-tag.sync="tag" />
+        <TagList
+          class-prefix="main"
+          :tag-list="transportTags"
+          :selected-tag.sync="tag"
+        />
       </div>
       <div class="house">
         <div class="kind-name">居住</div>
-        <TagList class-prefix="main" :tag-list="houseTags" :selected-tag.sync="tag" />
+        <TagList
+          class-prefix="main"
+          :tag-list="houseTags"
+          :selected-tag.sync="tag"
+        />
       </div>
       <div class="entertainment">
         <div class="kind-name">娱乐</div>
-        <TagList class-prefix="main" :tag-list="entertainmentTags" :selected-tag.sync="tag" />
+        <TagList
+          class-prefix="main"
+          :tag-list="entertainmentTags"
+          :selected-tag.sync="tag"
+        />
       </div>
       <div class="medical">
         <div class="kind-name">医疗</div>
-        <TagList class-prefix="main" :tag-list="medicalTags" :selected-tag.sync="tag" />
+        <TagList
+          class-prefix="main"
+          :tag-list="medicalTags"
+          :selected-tag.sync="tag"
+        />
       </div>
     </div>
   </div>
@@ -135,13 +159,14 @@ export default class Label extends Vue {
     }
   }
 }
-
-.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: white;
+.tags {
+  .fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+  }
 }
 
 .header {
@@ -160,8 +185,8 @@ export default class Label extends Vue {
 
     .back {
       svg {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
       }
 
       background: inherit;
@@ -169,12 +194,12 @@ export default class Label extends Vue {
       margin-right: 8px;
     }
     .addTags {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 
   .ok {
-    font-size: 18px;
+    font-size: 16px;
     // color: red;
     border: none;
     background: inherit;

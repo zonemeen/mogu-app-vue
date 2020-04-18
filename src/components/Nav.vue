@@ -38,7 +38,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 40px;
+  padding: 6px 40px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   position: fixed;
   left: 0;
