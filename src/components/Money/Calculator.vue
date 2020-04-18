@@ -270,7 +270,7 @@ export default class Calculator extends Vue {
     input {
       flex-grow: 1;
       margin-left: 8px;
-      height: 32px;
+      height: 28px;
       border: none;
       background: inherit;
     }
@@ -279,7 +279,7 @@ export default class Calculator extends Vue {
   .panel {
     background: #f5f5f5;
     padding: 12px 12px;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 24px;
     font-family: Consolas, monospace;
     text-align: right;
@@ -289,11 +289,11 @@ export default class Calculator extends Vue {
     @extend %clear-fix;
 
     button {
-      $h: 50px;
+      $h: 46px;
       float: left;
       width: 25%;
       height: $h;
-      font-size: 15px;
+      font-size: 14px;
       border: none;
 
       &.ok {

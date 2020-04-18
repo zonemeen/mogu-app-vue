@@ -2,7 +2,7 @@
   <Layout>
     <header class="header">
       <div class="logo">
-        <img :src="logo" alt="蘑菇记账" />
+        <img src="../assets/logo.png" alt="蘑菇记账" />
       </div>
       <div class="info">
         <div class="calendar">
@@ -61,7 +61,7 @@
       </li>
     </ul>
     <div v-else class="reverse">
-      <Blank />
+      <Qrcode />
     </div>
   </Layout>
 </template>
@@ -74,7 +74,7 @@ import logo from "@/assets/logo.png";
 import Icon from "@/components/Icon.vue";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
-import Blank from "@/components/Blank.vue";
+import Qrcode from "@/components/Qrcode.vue";
 
 type Group = {
   name: string;
@@ -82,7 +82,7 @@ type Group = {
 };
 
 @Component({
-  components: { Blank, Icon, Layout },
+  components: { Qrcode, Icon, Layout }
 })
 export default class Bill extends Vue {
   logo: string = logo;
@@ -115,7 +115,7 @@ export default class Bill extends Vue {
     // 对记录排序
     const sortedRecordList = clone<RecordItem[]>(this.recordList)
       .filter(
-        (item) =>
+        item =>
           dayjs(item.createAt).year() === parseInt(this.year) &&
           dayjs(item.createAt).month() + 1 === parseInt(this.month)
       )
@@ -196,7 +196,7 @@ export default class Bill extends Vue {
         "星期三",
         "星期四",
         "星期五",
-        "星期六",
+        "星期六"
       ][value];
     }
   }
