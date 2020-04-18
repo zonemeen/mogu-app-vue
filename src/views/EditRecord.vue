@@ -8,7 +8,7 @@
         <div class="icon">
           <Icon :name="record.tag.name" />
         </div>
-        <span>{{ record.tag.value }}</span>
+        <span class="value">{{ record.tag.value }}</span>
       </div>
       <div class="back"></div>
     </header>
@@ -164,13 +164,10 @@ export default class EditRecord extends Vue {
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
-
     .icon {
       background: #f5f5f5;
-      padding: 8px;
+      padding: 6px;
       border-radius: 50%;
-      margin-bottom: 8px;
-
       svg {
         width: 32px;
         height: 32px;

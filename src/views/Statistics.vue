@@ -1,13 +1,7 @@
 <template>
   <Layout>
     <header class="header">
-      <select v-model="type" class="type">
-        <option v-for="(t, index) in typeList" :key="index" :value="t.value">
-          {{
-          t.name
-          }}
-        </option>
-      </select>
+      <TabBar class-prefix="types" :bars="typeList" :c-bar.sync="type" />
       <TabBar class-prefix="interval" :bars="intervalList" :c-bar.sync="interval" />
     </header>
     <div class="chart">
@@ -333,7 +327,10 @@ export default class Charts extends Vue {
 <style lang="scss" scoped>
 .header {
   background: #3eb575;
-  padding: 4px 0;
+  padding: 9px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
   .type {
     font-size: 20px;
@@ -342,21 +339,41 @@ export default class Charts extends Vue {
 
   ::v-deep {
     .interval-tab-bar {
-      margin: 8px 16px;
-      display: flex;
-      justify-content: center;
+      margin: 12px 10px;
 
       .interval-tab-bar-item {
         font-size: 14px;
-        width: 33%;
+        width: 70px;
         border: 1px solid #333333;
 
         &:first-child {
-          border-radius: 4px 0 0 4px;
+          border-radius: 8px 0 0 8px;
         }
 
         &:last-child {
-          border-radius: 0 4px 4px 0;
+          border-radius: 0 8px 8px 0;
+        }
+
+        &.selected {
+          background: #333333;
+          color: #3eb575;
+        }
+      }
+    }
+  }
+  ::v-deep {
+    .types-tab-bar {
+      .types-tab-bar-item {
+        font-size: 14px;
+        width: 50px;
+        border: 1px solid #333333;
+
+        &:first-child {
+          border-radius: 8px 0 0 8px;
+        }
+
+        &:last-child {
+          border-radius: 0 8px 8px 0;
         }
 
         &.selected {

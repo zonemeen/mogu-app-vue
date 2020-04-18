@@ -2,7 +2,7 @@
   <Layout>
     <header class="header">
       <div class="logo">
-        <img :src="logo" alt="咸鱼记账" />
+        <img :src="logo" alt="蘑菇记账" />
       </div>
       <div class="info">
         <div class="calendar">
@@ -12,9 +12,7 @@
           <div class="month">
             <select v-model="month">
               <option v-for="m in 12" :key="m" :value="m">
-                {{
-                beautifyMonth(m)
-                }}
+                {{ beautifyMonth(m) }}
               </option>
             </select>
             <span>月</span>
@@ -84,7 +82,7 @@ type Group = {
 };
 
 @Component({
-  components: { Blank, Icon, Layout }
+  components: { Blank, Icon, Layout },
 })
 export default class Bill extends Vue {
   logo: string = logo;
@@ -117,7 +115,7 @@ export default class Bill extends Vue {
     // 对记录排序
     const sortedRecordList = clone<RecordItem[]>(this.recordList)
       .filter(
-        item =>
+        (item) =>
           dayjs(item.createAt).year() === parseInt(this.year) &&
           dayjs(item.createAt).month() + 1 === parseInt(this.month)
       )
@@ -198,7 +196,7 @@ export default class Bill extends Vue {
         "星期三",
         "星期四",
         "星期五",
-        "星期六"
+        "星期六",
       ][value];
     }
   }
@@ -261,7 +259,7 @@ export default class Bill extends Vue {
 
   .logo {
     img {
-      height: 30px;
+      height: 40px;
       vertical-align: top;
       margin-top: 10px;
       margin-left: auto;

@@ -108,18 +108,16 @@ export default class Money extends Vue {
   display: flex;
   justify-content: center;
   position: relative;
-  :nth-child(1) {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+  :first-child {
+    border-radius: 10px 0 0 10px;
   }
-  :nth-child(2) {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+  :last-child {
+    border-radius: 0 10px 10px 0;
   }
 
   ::v-deep .types-tab-bar-item {
     padding: 5px 50px;
-    margin: 15px 0;
+    margin: 20px 0;
   }
 }
 </style>
