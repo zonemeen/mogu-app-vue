@@ -189,7 +189,7 @@ export default class Calculator extends Vue {
   }
 
   complete() {
-    if (this.output === "0") {
+    if (this.output === "0" || this.output === "0.") {
       alert("请输入金额!");
       return;
     }
