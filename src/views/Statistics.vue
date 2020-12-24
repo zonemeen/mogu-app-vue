@@ -2,7 +2,11 @@
   <Layout>
     <header class="header">
       <TabBar class-prefix="types" :bars="typeList" :c-bar.sync="type" />
-      <TabBar class-prefix="interval" :bars="intervalList" :c-bar.sync="interval" />
+      <TabBar
+        class-prefix="interval"
+        :bars="intervalList"
+        :c-bar.sync="interval"
+      />
     </header>
     <div class="chart">
       <div class="caption">
@@ -10,7 +14,10 @@
         <span v-else-if="interval === 'month'">本月</span>
         <span v-else>今年</span>
       </div>
-      <div class="total">总支出: ¥{{ total }}</div>
+      <div class="total">
+        <span v-if="type === '-'">总支出: ¥{{ total }}</span>
+        <span v-else>总收入: ¥{{ total }}</span>
+      </div>
       <div class="average">平均值: ¥{{ average }}</div>
       <div id="figure"></div>
     </div>
@@ -19,7 +26,11 @@
         <span>支出排行榜</span>
       </div>
       <ul class="tag-list" v-if="targetRecords.length > 0">
-        <li class="tag-item" v-for="(item, index) in this.groupByTag()" :key="index">
+        <li
+          class="tag-item"
+          v-for="(item, index) in this.groupByTag()"
+          :key="index"
+        >
           <div class="tag-info">
             <div class="icon">
               <Icon :name="item.tag.name" />
@@ -56,17 +67,17 @@ type Group = {
 };
 
 @Component({
-  components: { Blank, Icon, TabBar, Layout }
+  components: { Blank, Icon, TabBar, Layout },
 })
 export default class Charts extends Vue {
   typeList: TabBarItem[] = [
     { name: "支出", value: "-" },
-    { name: "收入", value: "+" }
+    { name: "收入", value: "+" },
   ];
   intervalList: TabBarItem[] = [
     { name: "周", value: "week" },
     { name: "月", value: "month" },
-    { name: "年", value: "year" }
+    { name: "年", value: "year" },
   ];
 
   type: "+" | "-" = "-";
@@ -75,8 +86,8 @@ export default class Charts extends Vue {
   get targetRecords(): RecordItem[] {
     const now = dayjs();
     return clone<RecordItem[]>(this.$store.state.recordList)
-      .filter(item => item.type === this.type)
-      .filter(item => dayjs(item.createAt).isSame(now, this.interval));
+      .filter((item) => item.type === this.type)
+      .filter((item) => dayjs(item.createAt).isSame(now, this.interval));
   }
 
   get total() {
@@ -92,9 +103,9 @@ export default class Charts extends Vue {
     const now = dayjs();
     switch (this.interval) {
       case "week":
-        return twoDecimalPlaces(this.total / (now.day() + 1));
+        return twoDecimalPlaces(this.total / (now.day() + 3));
       case "month":
-        return twoDecimalPlaces(this.total / now.date());
+        return twoDecimalPlaces(this.total / (now.date() + 7));
       case "year":
         return twoDecimalPlaces(this.total / (now.month() + 1));
       default:
@@ -210,7 +221,7 @@ export default class Charts extends Vue {
       "九月",
       "十月",
       "十一月",
-      "十二月"
+      "十二月",
     ];
     const result = new Map<string, number>();
     let i: number;
@@ -246,40 +257,40 @@ export default class Charts extends Vue {
     figure.setOption({
       grid: {
         top: "5%",
-        bottom: "10%"
+        bottom: "10%",
       },
       xAxis: {
         data: x,
         axisTick: {
           interval: 0,
           lineStyle: {
-            opacity: 0
-          }
+            opacity: 0,
+          },
         },
         axisLabel: {
           interval: 0,
           fontSize: 8,
-          color: "#999999"
-        }
+          color: "#999999",
+        },
       },
       yAxis: {
         axisLine: {
           lineStyle: {
-            opacity: 0
-          }
+            opacity: 0,
+          },
         },
         splitLine: {
           lineStyle: {
-            opacity: 0
-          }
+            opacity: 0,
+          },
         },
         axisLabel: undefined,
-        axisTick: undefined
+        axisTick: undefined,
       },
       series: [
         {
           type: "line",
-          data: y
+          data: y,
         },
         {
           name: "平均线",
@@ -290,8 +301,8 @@ export default class Charts extends Vue {
             type: "dashed",
             color: "#999999",
             width: 1,
-            opacity: 0.5
-          }
+            opacity: 0.5,
+          },
         },
         {
           name: "最大值",
@@ -301,10 +312,10 @@ export default class Charts extends Vue {
           lineStyle: {
             color: "#999999",
             width: 1,
-            opacity: 0.5
-          }
-        }
-      ]
+            opacity: 0.5,
+          },
+        },
+      ],
     });
   }
 

@@ -2,7 +2,7 @@
   <Layout>
     <header class="header">
       <div class="logo">
-        <img src="../assets/logo.png" alt="蘑菇记账" />
+        <img src="../assets/mogu-logo.png" alt="蘑菇记账" />
       </div>
       <div class="info">
         <div class="calendar">
@@ -11,9 +11,9 @@
           </select>
           <div class="month">
             <select v-model="month">
-              <option v-for="m in 12" :key="m" :value="m">
-                {{ beautifyMonth(m) }}
-              </option>
+              <option v-for="m in 12" :key="m" :value="m">{{
+                beautifyMonth(m)
+              }}</option>
             </select>
             <span>月</span>
             <Icon name="triangle" class="icon" />
@@ -70,7 +70,7 @@
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 import Layout from "@/components/Layout.vue";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/mogu-logo.png";
 import Icon from "@/components/Icon.vue";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
@@ -82,7 +82,7 @@ type Group = {
 };
 
 @Component({
-  components: { Qrcode, Icon, Layout }
+  components: { Qrcode, Icon, Layout },
 })
 export default class Bill extends Vue {
   logo: string = logo;
@@ -115,7 +115,7 @@ export default class Bill extends Vue {
     // 对记录排序
     const sortedRecordList = clone<RecordItem[]>(this.recordList)
       .filter(
-        item =>
+        (item) =>
           dayjs(item.createAt).year() === parseInt(this.year) &&
           dayjs(item.createAt).month() + 1 === parseInt(this.month)
       )
@@ -196,7 +196,7 @@ export default class Bill extends Vue {
         "星期三",
         "星期四",
         "星期五",
-        "星期六"
+        "星期六",
       ][value];
     }
   }
