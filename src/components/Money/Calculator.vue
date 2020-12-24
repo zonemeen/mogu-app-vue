@@ -36,7 +36,7 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 import Icon from "@/components/Icon.vue";
 
 @Component({
-  components: { Icon }
+  components: { Icon },
 })
 export default class Calculator extends Vue {
   @Prop(String) classPrefix?: string;
@@ -56,7 +56,7 @@ export default class Calculator extends Vue {
     "9",
     "完成",
     ".",
-    "0"
+    "0",
   ];
   output = "0";
   dot = true;
@@ -96,6 +96,7 @@ export default class Calculator extends Vue {
       }
       return;
     }
+
     // 处理输入为点
     if (button === ".") {
       return this.handleDot();
@@ -188,6 +189,10 @@ export default class Calculator extends Vue {
   }
 
   complete() {
+    if (this.output === "0") {
+      alert("请输入金额!");
+      return;
+    }
     const last = this.output.slice(-1);
     if (
       (this.output.indexOf("+") >= 0 || this.output.indexOf("-") >= 0) &&
